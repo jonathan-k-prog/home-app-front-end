@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.chart-placeholder {
+  min-height: 16rem;
+  padding: 1rem;
+  border: 1px dashed #a1a1aa;
+  border-radius: 0.75rem;
+  background: #fafafa;
+}

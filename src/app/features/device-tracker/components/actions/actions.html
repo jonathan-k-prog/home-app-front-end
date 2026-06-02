@@ -1,0 +1,10 @@
+<div class="flex gap-2">
+  @if (!selectedDevice) {
+    <p-button label="Select" icon="fa-solid fa-plus" (onClick)="select()"/>
+  } @else {
+    <p-button label="Unselect" icon="fa-solid fa-plus" (onClick)="unselect()"/>
+  }
+  <p-button label="Refresh" icon="fa-solid fa-refresh" severity="help" (onClick)="refresh()"/>
+</div>
+
+<common-modal-select-device [devices]="devices" [loadingDevices]="loadingDevices" (onSubmit)="selectSubmit($event)"/>

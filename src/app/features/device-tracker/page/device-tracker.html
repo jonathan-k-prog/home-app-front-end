@@ -1,0 +1,14 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <device-tracker-title/>
+    <device-tracker-actions
+      [selectedDevice]="selectedDevice$ | async"
+      [devices]="(devices$ | async) || []"
+      [loadingDevices]="(loadingDevices$ | async) || false"/>
+  </div>
+
+  <device-tracker-properties [device]="selectedDevice$ | async" class="mb-2"/>
+  <device-tracker-container [selectedDevice]="selectedDevice$ | async"/>
+
+</div>
+<p-toast position="bottom-right"/>

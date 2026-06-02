@@ -1,0 +1,38 @@
+.auth-page {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.auth-panel {
+  width: min(100%, 24rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: 0 1rem 2rem rgb(15 23 42 / 12%);
+}
+
+.auth-panel h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.auth-panel p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.auth-message {
+  font-size: 0.875rem;
+}
+
+.auth-error {
+  font-size: 0.875rem;
+  color: #b91c1c;
+}

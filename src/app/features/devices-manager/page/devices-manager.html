@@ -1,0 +1,13 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <devices-manager-title/>
+    <devices-manager-actions [rooms]="(rooms$ | async) || []" [loadingRooms]="(loadingRooms$ | async) || false"/>
+  </div>
+
+  <devices-manager-table
+    [devices]="(devices$ | async) || []"
+    [loadingDevices]="(loadingDevices$ | async) || false"
+    [rooms]="(rooms$ | async) || []"
+    [loadingRooms]="(loadingRooms$ | async) || false"/>
+</div>
+<p-toast position="bottom-right"/>

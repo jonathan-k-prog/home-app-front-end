@@ -1,0 +1,7 @@
+{
+  "redirectUri": "$REDIRECT_URI",
+  "apiUrl": "$API_URL",
+  "googleClientId": "$GOOGLE_CLIENT_ID",
+  "appName": "$APP_NAME",
+  "version": "$VERSION"
+}

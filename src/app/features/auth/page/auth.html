@@ -1,0 +1,16 @@
+<section class="auth-page">
+  <div class="auth-panel">
+    <h1>Connexion</h1>
+    <p>Connecte-toi avec Google pour acceder a la meteo.</p>
+
+    <div id="google-sign-in-button"></div>
+
+    @if (loading) {
+      <p class="auth-message">Connexion en cours...</p>
+    }
+
+    @if (error) {
+      <p class="auth-error">{{ error }}</p>
+    }
+  </div>
+</section>

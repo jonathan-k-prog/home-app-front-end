@@ -1,0 +1,9 @@
+services:
+  home-frontend:
+    build:
+      context: .
+      target: prod
+    container_name: home-frontend
+    ports:
+      - "4200:80"
+    restart: unless-stopped

@@ -1,0 +1,9 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <rooms-manager-title/>
+    <rooms-manager-actions/>
+  </div>
+
+  <rooms-manager-table [rooms]="(rooms$ | async) || []" [loading]="(loadingRooms$ | async) || false"/>
+</div>
+<p-toast position="bottom-right"/>
