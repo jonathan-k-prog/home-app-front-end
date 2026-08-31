@@ -1,0 +1,13 @@
+<div class="p-6 flex flex-col h-full">
+  <div class="flex items-center justify-between mb-6">
+    <chat-bot-title />
+    <chat-bot-actions />
+  </div>
+
+  <div class="flex flex-row h-full gap-2">
+    <chat-bot-conservations class="w-[10%]" [conversations]="conversationStore.conversations()"/>
+    <chat-bot-chat class="w-[90%]" [selectedConversation]="chatBotStore.selectedConversation()" [messages]="messageStore.messages()" />
+  </div>
+</div>
+<p-toast position="bottom-right"/>
+<common-modal-loading/>

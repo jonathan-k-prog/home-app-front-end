@@ -1,0 +1,2 @@
+<p-avatar [image]="authService.getSession()?.user?.pictureUrl" shape="circle" (click)="userMenu.toggle($event)" />
+<p-menu #userMenu [model]="userItems" [popup]="true" styleClass="w-40" />

@@ -1,0 +1,5 @@
+<p-panel header="Devices" [toggleable]="true" [(collapsed)]="collapsed">
+  @for (device of filterDevices(); track device.id) {
+    <p>{{device.name}}</p>
+  }
+</p-panel>

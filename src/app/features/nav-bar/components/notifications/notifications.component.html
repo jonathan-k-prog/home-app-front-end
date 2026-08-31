@@ -1,0 +1,28 @@
+<p-popover #op>
+    <ng-template #content>
+      @if (notifications().length > 0) {
+        <div class="flex flex-col gap-2">
+          @for (notification of notifications(); track notification.id) {
+            @if (notification.read) {
+              <p-button-group>
+                <p-button outlined [severity]="getSeverity(notification.type.toLocaleLowerCase())" [label]="notification.message" icon="fa-solid fa-thumbtack" iconPos="right" (onClick)="markNotification(notification)" />
+                <p-button outlined [severity]="getSeverity(notification.type.toLocaleLowerCase())" icon="fa-solid fa-trash-can" (onClick)="deleteNotification(notification)" />
+              </p-button-group>
+            } @else {
+              <p-button-group>
+                <p-button [severity]="getSeverity(notification.type.toLocaleLowerCase())" [label]="notification.message" icon="fa-solid fa-thumbtack-slash" iconPos="right" (onClick)="unmarkNotification(notification)" />
+                <p-button [severity]="getSeverity(notification.type.toLocaleLowerCase())" icon="fa-solid fa-trash-can" (onClick)="deleteNotification(notification)" />
+              </p-button-group>
+            }
+          }
+        </div>
+      } @else {
+        <p>No Notifications</p>
+      }
+    </ng-template>
+  </p-popover>
+  @if (getUnreadNotifications(notifications()).length) {
+    <p-button icon="fa-solid fa-bell" severity="contrast" [badge]="getUnreadNotifications(notifications()).length.toString()" (click)="op.toggle($event)" size="large"/>
+  } @else {
+    <p-button icon="fa-solid fa-bell" severity="contrast" (click)="op.toggle($event)"/>
+  }

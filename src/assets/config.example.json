@@ -1,0 +1,8 @@
+{
+  "redirectUri": "http://localhost:4200",
+  "apiUrl": "http://localhost:8080",
+  "googleClientId": "6319473777-18v6aqp96r2jl9fn72hbmvv7ir9f1edn.apps.googleusercontent.com",
+  "mqttUrl": "ws://localhost:9001",
+  "appName": "Home App",
+  "version": "0.0.1"
+}

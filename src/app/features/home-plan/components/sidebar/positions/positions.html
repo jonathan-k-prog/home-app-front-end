@@ -1,0 +1,18 @@
+<p-panel header="Positions" [toggleable]="true" [(collapsed)]="collapsed">
+  <form [formGroup]="form">
+    <div class="flex flex-col gap-4">
+      <label for="x" class="font-semibold w-24">X</label>
+      <input pInputText type="number" min="0" id="x" placeholder="X" formControlName="x" [invalid]="isInvalid('x')" />
+      @if (isInvalid('x')) {
+        <p-message severity="error" size="small" variant="simple">X is required.</p-message>
+      }
+    </div>
+    <div class="flex flex-col gap-4">
+      <label for="y" class="font-semibold w-24">Y</label>
+      <input pInputText type="number" min="1" id="y" placeholder="Y" formControlName="y" [invalid]="isInvalid('y')" />
+      @if (isInvalid('y')) {
+        <p-message severity="error" size="small" variant="simple">Y is required.</p-message>
+      }
+    </div>
+  </form>
+</p-panel>

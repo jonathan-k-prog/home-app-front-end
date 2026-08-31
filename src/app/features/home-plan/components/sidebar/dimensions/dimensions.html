@@ -1,0 +1,20 @@
+<p-panel header="Dimensions" [toggleable]="true" [(collapsed)]="collapsed">
+  <form [formGroup]="form">
+    <div class="flex flex-col gap-4 mb-4 w-full">
+      <div class="flex flex-col gap-4">
+        <label for="width" class="font-semibold w-24">Width</label>
+        <p-input-number [min]="0"  id="width" placeholder="Width" formControlName="width" [invalid]="isInvalid('width')" />
+        @if (isInvalid('width')) {
+          <p-message severity="error" size="small" variant="simple">Width is required.</p-message>
+        }
+      </div>
+      <div class="flex flex-col gap-4">
+        <label for="height" class="font-semibold w-24">Height</label>
+        <p-input-number [min]="1" id="height" placeholder="Height" formControlName="height" [invalid]="isInvalid('height')" />
+        @if (isInvalid('height')) {
+          <p-message severity="error" size="small" variant="simple">Height is required.</p-message>
+        }
+      </div>
+    </div>
+  </form>
+</p-panel>

@@ -1,0 +1,25 @@
+<div class="p-6 flex flex-col h-full">
+  <div class="flex items-center justify-between mb-6">
+    <home-plan-title/>
+    <home-plan-actions
+      [home]="homeStore.current()"
+      [rooms]="roomStore.rooms()"
+      [(zoom)]="zoom"
+      [(floor)]="floor"/>
+  </div>
+
+  <div class="flex flex-row h-full gap-2">
+    <home-plan-display
+      class="w-[80%]"
+      [(selectedRoom)]="selectedRoom"
+      [rooms]="roomStore.rooms()"
+      [devices]="deviceStore.devices()"
+      [zoom]="zoom()"
+      [floor]="floor()"
+    />
+    <home-plan-sidebar class="w-[20%]"
+      [(selectedRoom)]="selectedRoom"
+      [devices]="deviceStore.devices()"/>
+  </div>
+</div>
+<p-toast position="bottom-right"/>

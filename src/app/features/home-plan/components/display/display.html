@@ -1,0 +1,38 @@
+<p-card [style]="{ width: '100%', height: '100%', padding: '16px' }">
+  <div class="flex flex-col h-full">
+    <div class="flex flex-col flex-1 border relative overflow-hidden"
+         [style.background-image]="'linear-gradient(to right, #ccc 1px, transparent 1px), linear-gradient(to bottom, #ccc 1px, transparent 1px)'"
+         [style.background-size]="(10 * zoom()) + 'px ' + (10 * zoom()) + 'px'">
+      @let selected = selectedRoom();
+      @for (room of roomsOnFloor(); track room.id) {
+        @if (selected && selected.id === room.id) {
+          <div class="example-box border border-black  cursor-pointer flex flex-col justify-center items-center absolute bg-gray-400"
+               [style.width.px]="selected.width * zoom()"
+               [style.height.px]="selected.height * zoom()"
+               [style.left.px]="selected.x * zoom()"
+               [style.top.px]="selected.y * zoom()"
+               (click)="onSelectRoom(room)"
+          >
+            <p>Name : {{ selected.name }} </p>
+            <p>Devices : {{ devicesByRoom().get(selected.id) ?? 0 }} </p>
+            <p>Temperature : TODO °C </p>
+            <p>Humidity : TODO % </p>
+          </div>
+        } @else {
+          <div class="example-box border border-black cursor-pointer flex flex-col justify-center items-center absolute bg-gray-200"
+               [style.width.px]="room.width * zoom()"
+               [style.height.px]="room.height * zoom()"
+               [style.left.px]="room.x * zoom()"
+               [style.top.px]="room.y * zoom()"
+               (click)="onSelectRoom(room)"
+          >
+            <p>Name : {{ room.name }} </p>
+            <p>Devices : {{ devicesByRoom().get(room.id) ?? 0 }} </p>
+            <p>Temperature : TODO °C </p>
+            <p>Humidity : TODO % </p>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</p-card>

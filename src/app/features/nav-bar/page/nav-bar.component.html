@@ -1,0 +1,30 @@
+<p-menubar [model]="items" class="custom-menubar">
+  <ng-template #start>
+    <nav-bar-logo/>
+  </ng-template>
+  <ng-template #item let-item let-root="root">
+    <button (click)="navigate(item.route)" pRipple class="flex items-center px-4 py-3 cursor-pointer gap-2">
+      @if (item.icon) {
+        <i [class]="item.icon" ></i>
+      }
+      <span>{{ item.label }}</span>
+      @if (item.badge) {
+        <p-badge [ngClass]="{ 'ms-auto': !root }" [value]="item.badge" />
+      }
+      @if (item.shortcut) {
+        <span class="ms-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
+      }
+      @if (item.items) {
+        <i [ngClass]="['ms-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+      }
+    </button>
+  </ng-template>
+  <ng-template #end>
+    <div class="flex items-center gap-2">
+      <nav-bar-home [homes]="homeStore.homes()"/>
+      <nav-bar-notifications [notifications]="notificationStore.notifications()"/>
+      <nav-bar-user/>
+    </div>
+  </ng-template>
+</p-menubar>
+

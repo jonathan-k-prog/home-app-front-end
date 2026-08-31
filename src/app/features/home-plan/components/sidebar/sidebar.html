@@ -1,0 +1,40 @@
+<p-card [style]="{ width: '100%', height: '100%', padding: '16px' }">
+  <div class="flex flex-col h-full gap-4">
+    @if (selectedRoom()) {
+      <!--<div class="flex flex-col gap-4">
+        <label for="name" class="font-semibold w-24">Name</label>
+        <input pInputText type="text" min="0" id="name" placeholder="Name" formControlName="name" [invalid]="isInvalid('name')" />
+        @if (isInvalid('name')) {
+          <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
+        }
+      </div>-->
+      <home-plan-sidebar-properties [(selectedRoom)]="selectedRoom"/>
+
+      <div class="flex flex-col items-center">
+        <p-button (onClick)="moveUp()" icon="fa-solid fa-arrow-up"/>
+        <div class="flex flex-row gap-10 items-center">
+          <p-button (onClick)="moveLeft()" icon="fa-solid fa-arrow-left"/>
+          <p-button (onClick)="moveRight()" icon="fa-solid fa-arrow-right"/>
+        </div>
+        <p-button (onClick)="moveDown()" icon="fa-solid fa-arrow-down"/>
+      </div>
+
+      <home-plan-sidebar-positions [(selectedRoom)]="selectedRoom"/>
+      <home-plan-sidebar-dimensions [(selectedRoom)]="selectedRoom"/>
+      <home-plan-sidebar-devices [selectedRoom]="selectedRoom()" [devices]="devices()"/>
+
+      <div class="flex flex-col h-full justify-end">
+        <div class="flex flex-row justify-center gap-2">
+          <p-button (onClick)="cancel()" label="Cancel"/>
+          <p-button (onClick)="save()" label="Save"/>
+
+        </div>
+      </div>
+
+    } @else {
+      <div class="flex flex-col flex-1 border justify-center items-center">
+        <p class="text-2xl font-bold">No room selected</p>
+      </div>
+    }
+  </div>
+</p-card>

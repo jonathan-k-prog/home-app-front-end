@@ -1,0 +1,12 @@
+<div class="flex gap-2 items-center">
+  <p-button label="Add Room" icon="fa-solid fa-plus" (onClick)="addRoom()"/>
+  <p-button label="Next Floor" icon="fa-solid fa-plus" [disabled]="!isNextFloorPossible()" (onClick)="nextFloor()"/>
+  <p class="font-bold text-xl">{{floor()}}</p>
+  <p-button label="Previous Floor" icon="fa-solid fa-minus" [disabled]="!isPreviousFloorPossible()" (onClick)="previousFloor()"/>
+  <p-button label="Zoom In" icon="fa-solid fa-magnifying-glass-plus" [disabled]="!(zoom() + 1 <= 15)" (onClick)="zoomIn()"/>
+  <p class="font-bold text-xl">{{zoom() * 10}}%</p>
+  <p-button label="Zoom Out" icon="fa-solid fa-magnifying-glass-minus" [disabled]="!(zoom() - 1 >= 5)" (onClick)="zoomOut()"/>
+</div>
+
+
+<common-modal-add-room (onSubmit)="addRoomSubmit($event)"/>

@@ -1,0 +1,10 @@
+::ng-deep .conversation-btn {
+  width: 100%;
+  overflow: hidden;
+}
+
+::ng-deep .conversation-btn .p-button-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

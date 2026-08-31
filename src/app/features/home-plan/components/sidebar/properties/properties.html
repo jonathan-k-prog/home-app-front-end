@@ -1,0 +1,27 @@
+<p-panel header="Properties" [toggleable]="true" [(collapsed)]="collapsed">
+  <form [formGroup]="form">
+    <div class="flex flex-col gap-4 mb-4 w-full">
+      <div class="flex flex-col gap-4">
+        <label for="name" class="font-semibold w-24">Name</label>
+        <input pInputText id="name" placeholder="Name" formControlName="name" [invalid]="isInvalid('name')" />
+        @if (isInvalid('name')) {
+          <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
+        }
+      </div>
+      <div class="flex flex-col gap-4">
+        <label for="type" class="font-semibold w-24">Type</label>
+        <p-select id="type" [options]="roomTypeOptions" optionLabel="label" optionValue="value" formControlName="type" appendTo="body" placeholder="Select a type" />
+        @if (isInvalid('type')) {
+          <p-message severity="error" size="small" variant="simple">Type is required.</p-message>
+        }
+      </div>
+      <div class="flex flex-col gap-4">
+        <label for="floor" class="font-semibold w-24">Floor</label>
+        <p-input-number id="floor" placeholder="Floor" formControlName="floor" [invalid]="isInvalid('floor')" />
+        @if (isInvalid('floor')) {
+          <p-message severity="error" size="small" variant="simple">Floor is required.</p-message>
+        }
+      </div>
+    </div>
+  </form>
+</p-panel>

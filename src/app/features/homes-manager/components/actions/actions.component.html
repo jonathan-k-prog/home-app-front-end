@@ -1,0 +1,7 @@
+<div class="flex gap-2">
+  <p-button label="Add" icon="fa-solid fa-plus" (onClick)="add()"/>
+  <p-button label="Refresh" icon="fa-solid fa-refresh" severity="help" (onClick)="refresh()"/>
+</div>
+
+<common-modal-add-home (onSubmit)="addSubmit($event)" [homes]="homes()" [loadingHomes]="loadingHomes()"/>
+

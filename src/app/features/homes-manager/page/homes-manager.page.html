@@ -1,0 +1,11 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <homes-manager-title/>
+    <homes-manager-actions [homes]="homeStore.homes()" [loadingHomes]="homeStore.loadingHomes()"/>
+  </div>
+
+  <homes-manager-table
+    [homes]="homeStore.homes()"
+    [loadingHomes]="homeStore.loadingHomes()"/>
+</div>
+<p-toast position="bottom-right"/>
