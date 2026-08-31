@@ -1,0 +1,9 @@
+.weather-title {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(14, 116, 144, 0.12);
+  padding: 0.35rem 0.75rem;
+  color: rgb(14, 116, 144);
+  font-size: 0.875rem;
+  font-weight: 600;
+}

@@ -1,34 +1,26 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Chart} from './chart/chart';
+import {Component, OnDestroy, OnInit, inject, input} from '@angular/core';
 import {Device} from '../../../../core/device/device.model';
-import {Store} from '@ngrx/store';
-import {DeviceTrackerActions} from '../../store/device-tracker.actions';
-import {DateFormatter} from '../../../../core/date/date.formatter';
 import {Card} from 'primeng/card';
+import {DeviceTrackerStore} from '../../device-tracker.store';
 
 @Component({
   selector: 'device-tracker-container',
-  imports: [Chart, Card],
+  imports: [Card],
   templateUrl: './container.html',
   styleUrl: './container.css',
 })
 export class Container implements OnInit, OnDestroy {
-  @Input() selectedDevice: Device | null = null;
+  selectedDevice = input<Device | null>(null);
 
   private intervalId: any;
 
-  constructor(
-    private store: Store,
-    protected dateFormatter: DateFormatter,
-  ) {}
+  protected deviceTrackerStore = inject(DeviceTrackerStore);
 
   ngOnInit() {
     this.intervalId = setInterval(() => {
-      console.log()
-      if (this.selectedDevice) {
-        this.store.dispatch(
-          DeviceTrackerActions.refreshDevice({ device: this.selectedDevice! })
-        );
+      const selectedDevice = this.selectedDevice();
+      if (selectedDevice) {
+        this.deviceTrackerStore.refreshDevice(selectedDevice.id);
       }
     }, 5000); // 5000 ms = 5 secondes
   }

@@ -1,3 +1,18 @@
-.room-tracker-page {
-  padding: 1.5rem;
+/*
+:host {
+  display: block;
 }
+
+.room-tracker-page {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .device-tracker-page {
+    grid-template-columns: 1fr;
+  }
+}
+*/

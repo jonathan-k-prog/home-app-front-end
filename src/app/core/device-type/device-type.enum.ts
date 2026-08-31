@@ -1,4 +1,4 @@
 export enum DeviceType{
-  DEFAULT,
-  ESP_32_DHT11
+  DEFAULT = 'DEFAULT',
+  ESP_32_DHT11 = 'ESP_32_DHT11'
 }

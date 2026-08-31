@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Title} from '../components/title/title';
 import {Actions} from '../components/actions/actions';
 import {Toast} from 'primeng/toast';
 import {Properties} from '../components/properties/properties';
 import {Container} from '../components/container/container';
-import {Observable} from 'rxjs';
-import {Device} from '../../../core/device/device.model';
-import {Store} from '@ngrx/store';
-import {DeviceTrackerSelectors} from '../store/device-tracker.selector';
-import {DeviceTrackerActions} from '../store/device-tracker.actions';
-import {AsyncPipe} from '@angular/common';
+import {DeviceStore} from '../../../core/device/device.store';
+import {RoomStore} from '../../../core/room/room.store';
+import {HomeStore} from '../../../core/home/home.store';
+import {DeviceTrackerStore} from '../device-tracker.store';
 
 @Component({
   selector: 'app-device-tracker',
@@ -21,23 +19,20 @@ import {AsyncPipe} from '@angular/common';
     Toast,
     Properties,
     Container,
-    AsyncPipe
   ],
 })
 export class DeviceTrackerPage {
-  protected devices$: Observable<Device[]> = new Observable<Device[]>();
-  protected selectedDevice$: Observable<Device | null> = new Observable<Device | null>();
-  protected loadingDevices$: Observable<boolean> = new Observable<boolean>();
 
-  constructor(
-    private store: Store,
-  ) {}
+  protected deviceStore = inject(DeviceStore);
+  protected roomStore = inject(RoomStore);
+  protected homeStore = inject(HomeStore);
+  protected deviceTrackerStore = inject(DeviceTrackerStore);
 
   ngOnInit() {
-    this.devices$ = this.store.select(DeviceTrackerSelectors.devices);
-    this.selectedDevice$ = this.store.select(DeviceTrackerSelectors.selectedDevice);
-    this.loadingDevices$ = this.store.select(DeviceTrackerSelectors.loadingDevices);
+    const currentHome = this.homeStore.current();
 
-    this.store.dispatch(DeviceTrackerActions.loadDevices());
+    if(currentHome){
+      this.deviceStore.loadDevicesByHomeId(currentHome.id)
+    }
   }
 }

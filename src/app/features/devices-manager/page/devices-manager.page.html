@@ -1,0 +1,17 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <devices-manager-title/>
+    <devices-manager-actions
+      [rooms]="roomStore.rooms()"
+      [loadingRooms]="roomStore.loadingRooms()"
+      [home]="homeStore.current()"
+    />
+  </div>
+
+  <devices-manager-table
+    [devices]="deviceStore.devices()"
+    [loadingDevices]="deviceStore.loadingDevices()"
+    [rooms]="roomStore.rooms()"
+    [loadingRooms]="roomStore.loadingRooms()"/>
+</div>
+<p-toast position="bottom-right"/>

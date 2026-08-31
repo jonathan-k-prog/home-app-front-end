@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Device} from '../../../../../core/device/device.model';
 import {Button} from 'primeng/button';
 import {Dialog} from 'primeng/dialog';
@@ -13,9 +13,9 @@ import {Dialog} from 'primeng/dialog';
   styleUrl: './device.css',
 })
 export class CommonModalDeleteDeviceComponent {
-  @Input() device: Device | null = null;
   @Output() onSubmit: EventEmitter<Device> = new EventEmitter();
 
+  protected device: Device | null = null;
   protected visible: boolean = false;
 
   public showModal(device: Device) {

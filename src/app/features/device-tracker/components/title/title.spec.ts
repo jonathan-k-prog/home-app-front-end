@@ -19,4 +19,10 @@ describe('Title', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('renders the page title', () => {
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Device Tracker');
+  });
 });

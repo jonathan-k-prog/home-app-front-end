@@ -85,8 +85,8 @@ export class AuthPage implements AfterViewInit {
     this.error = '';
 
     this.authApi.loginWithGoogle(credential).subscribe({
-      next: (session) => {
-        this.authService.setSession(session);
+      next: (response) => {
+        this.authService.setLocal(response.data);
         this.router.navigateByUrl(this.route.snapshot.queryParamMap.get('returnUrl') || '/weather');
       },
       error: () => {

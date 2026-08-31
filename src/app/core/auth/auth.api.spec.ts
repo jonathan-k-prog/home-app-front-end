@@ -36,6 +36,6 @@ describe('AuthApi', () => {
 
     const request = httpTesting.expectOne('https://api.example.com/api/auth/google');
     expect(request.request.method).toBe('POST');
-    expect(request.request.body).toEqual({ credential: 'google-credential' });
+    expect(request.request.body).toEqual({ idToken: 'google-credential' });
   });
 });

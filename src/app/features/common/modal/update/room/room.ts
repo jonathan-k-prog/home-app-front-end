@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {Room} from '../../../../../core/room/room.model';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Dialog} from 'primeng/dialog';
@@ -28,15 +28,13 @@ export class CommonModalUpdateRoomComponent {
   protected visible: boolean = false;
   private currentRoom: Room | null = null;
   protected readonly roomTypeOptions = Object.values(RoomType)
-    .filter((value): value is RoomType => typeof value === 'number')
+    .filter((value): value is RoomType => typeof value === 'string')
     .map((value) => ({
       label: RoomType[value].replaceAll('_', ' '),
       value,
     }));
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {}
+  private formBuilder = inject(FormBuilder);
 
   ngOnInit() {
     this.form = this.formBuilder.group({

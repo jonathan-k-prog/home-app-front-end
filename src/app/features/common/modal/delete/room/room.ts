@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Room} from '../../../../../core/room/room.model';
 import {Button} from 'primeng/button';
 import {Dialog} from 'primeng/dialog';
@@ -13,9 +13,9 @@ import {Dialog} from 'primeng/dialog';
   styleUrl: './room.css',
 })
 export class CommonModalDeleteRoomComponent {
-  @Input() room: Room | null = null;
   @Output() onSubmit: EventEmitter<Room> = new EventEmitter();
 
+  protected room: Room | null = null;
   protected visible: boolean = false;
 
   public showModal(room: Room) {

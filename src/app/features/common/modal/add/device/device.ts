@@ -1,6 +1,14 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Device} from '../../../../../core/device/device.model';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, effect, EventEmitter, inject, input, Input, Output} from '@angular/core';
+import {Device, DeviceRequest} from '../../../../../core/device/device.model';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {Dialog} from 'primeng/dialog';
 import {Message} from 'primeng/message';
 import {Button} from 'primeng/button';
@@ -23,26 +31,35 @@ import {DeviceType} from '../../../../../core/device-type/device-type.enum';
   styleUrl: './device.css',
 })
 export class CommonModalAddDeviceComponent {
-  @Input() rooms: Room[] = [];
-  @Input() loadingRooms: boolean = false;
-  @Output() onSubmit: EventEmitter<Device> = new EventEmitter();
+  devices = input<Device[]>([]);
+  loadingDevices = input<boolean>(false);
+  rooms = input<Room[]>([]);
+  loadingRooms = input<boolean>(false);
+
+  @Output() onSubmit: EventEmitter<DeviceRequest> = new EventEmitter();
 
   protected form!: FormGroup;
   protected visible: boolean = false;
   protected readonly deviceTypeOptions = Object.values(DeviceType)
-    .filter((value): value is DeviceType => typeof value === 'number')
+    .filter((value): value is DeviceType => typeof value === 'string')
     .map((value) => ({
       label: DeviceType[value].replaceAll('_', ' '),
       value,
     }));
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {}
+  private formBuilder = inject(FormBuilder)
+
+  constructor() {
+    effect(() => {
+      this.devices();
+      this.form?.get('identifier')?.updateValueAndValidity({onlySelf: true});
+    });
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
+      identifier: ['', Validators.required, this.uniqueIdentifierValidator()],
       type: ['', Validators.required],
       roomId: [Validators.required],
     });
@@ -54,16 +71,16 @@ export class CommonModalAddDeviceComponent {
   }
 
   protected save() {
-    const room = this.rooms.find(tmp => tmp.id === this.form.value.roomId)
+    const room = this.rooms().find(tmp => tmp.id === this.form.value.roomId)
 
     if(room){
       this.onSubmit.emit({
-        id: 0,
         name: this.form.value.name,
+        identifier: this.form.value.identifier,
         type: this.form.value.type,
-        room: room,
-        temperatureReports: [],
-        humidityReports: []
+        connected: false,
+        lastSeen: Date.now(),
+        roomId: room.id,
       });
       this.form.reset();
       this.visible = false;
@@ -75,8 +92,19 @@ export class CommonModalAddDeviceComponent {
     this.visible = false;
   }
 
+  private uniqueIdentifierValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const taken = this.devices()?.some(d => d.identifier === control.value);
+      return taken ? { notUnique: true } : null;
+    };
+  }
+
   protected isInvalid(controlName: string) {
     const control = this.form.get(controlName);
-    return control?.invalid && control.touched;
+    return control?.invalid && (control.touched);
+  }
+
+  protected hasError(controlName: string, error: string) {
+    return this.form.get(controlName)?.hasError(error) && this.form.get(controlName)?.touched;
   }
 }

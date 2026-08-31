@@ -5,6 +5,6 @@ export interface AuthUser {
 }
 
 export interface AuthSession {
-  accessToken: string;
+  token: string;
   user: AuthUser;
 }

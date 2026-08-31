@@ -9,6 +9,7 @@ import {EffectsModule, provideEffects} from '@ngrx/effects';
 import {provideRouter} from '@angular/router';
 import {provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
 import {routes} from './app/app.routes';
+import {authInterceptor} from './app/core/auth/auth.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
 import {rootEffects, rootReducers} from './app/app.store';
 import Aura from '@primeuix/themes/aura';
@@ -20,8 +21,6 @@ export function initializeConfig() {
 
     try {
       const response = await fetch('/assets/config.json?v=' + Date.now(), { cache: 'no-cache' });
-
-      console.log(response);
       const config = await response.json();
       configService.setConfig(config);
     } catch (err) {
@@ -41,7 +40,7 @@ bootstrapApplication(App, {
     provideEffects(...rootEffects),
     importProvidersFrom(EffectsModule),
     provideRouter(routes),
-    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor]), withInterceptorsFromDi()),
     providePrimeNG({
       theme: {
         preset: Aura,

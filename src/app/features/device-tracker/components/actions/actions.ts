@@ -1,11 +1,8 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {Component, ViewChild, inject, input} from '@angular/core';
 import { Button } from 'primeng/button';
-import { Store } from '@ngrx/store';
 import { Device } from '../../../../core/device/device.model';
-import { Room } from '../../../../core/room/room.model';
-import { CommonModalAddDeviceComponent } from '../../../common/modal/add/device/device';
-import { DeviceTrackerActions } from '../../store/device-tracker.actions';
-import {CommonModalSelectDeviceComponent} from '../../../common/modal/select/device/device';
+import { CommonModalSelectDeviceComponent } from '../../../common/modal/select/device/device';
+import { DeviceTrackerStore } from '../../device-tracker.store';
 
 
 @Component({
@@ -18,30 +15,28 @@ import {CommonModalSelectDeviceComponent} from '../../../common/modal/select/dev
   styleUrl: './actions.css',
 })
 export class Actions {
-  @Input() selectedDevice: Device | null = null;
-  @Input() devices: Device[] = [];
-  @Input() loadingDevices: boolean = false;
+
+  selectedDevice = input<Device | null>(null);
+  devices = input<Device[]>([]);
+  loadingDevices = input<boolean>(false);
 
   @ViewChild(CommonModalSelectDeviceComponent) commonModalSelectDevice!: CommonModalSelectDeviceComponent;
 
-  constructor(
-    private store: Store,
-  ) {}
+  protected deviceTrackerStore = inject(DeviceTrackerStore);
 
   protected select() {
     this.commonModalSelectDevice.showModal();
   }
 
   protected unselect() {
-    this.store.dispatch(DeviceTrackerActions.unselectDevice());
+    this.deviceTrackerStore.unselectDevice();
   }
 
   protected selectSubmit(device: Device) {
-    console.log(device);
-    this.store.dispatch(DeviceTrackerActions.selectDevice({ device }));
+    this.deviceTrackerStore.selectDevice(device);
   }
 
   protected refresh() {
-    this.store.dispatch(DeviceTrackerActions.reset());
+    this.deviceTrackerStore.unselectDevice();
   }
 }

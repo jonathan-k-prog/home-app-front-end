@@ -1,4 +1,4 @@
 <div class="flex flex-row justify-between">
-  <p class="font-bold text-xl">Name: {{device ? device.name : 'No device selected'}}</p>
-  <p class="font-bold text-xl">Type: {{device ? device.type : 'No device selected'}}</p>
+  <p class="font-bold text-xl">Name: {{selectedDevice() ? selectedDevice()!.name : 'No device selected'}}</p>
+  <p class="font-bold text-xl">Type: {{selectedDevice() ? selectedDevice()!.type : 'No device selected'}}</p>
 </div>

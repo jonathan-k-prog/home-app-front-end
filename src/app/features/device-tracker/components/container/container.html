@@ -1,7 +1,7 @@
-@if (selectedDevice) {
+@if (selectedDevice()) {
   <p-card class="flex flex-col gap-4">
     <p>Humidity</p>
-    <device-tracker-container-chart
+    <!--<device-tracker-container-chart
       [y]="selectedDevice.humidityReports.map(tmp => tmp.value)"
       [x]="selectedDevice.humidityReports.map(tmp => dateFormatter.toStringForChart(tmp.timestamp))"
     />
@@ -9,7 +9,7 @@
     <device-tracker-container-chart
       [y]="selectedDevice.temperatureReports.map(tmp => tmp.value)"
       [x]="selectedDevice.temperatureReports.map(tmp => dateFormatter.toStringForChart(tmp.timestamp))"
-    />
+    />-->
   </p-card>
 
 }

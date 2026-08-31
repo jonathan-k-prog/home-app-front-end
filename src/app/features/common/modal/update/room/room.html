@@ -7,16 +7,9 @@
         <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
       }
     </div>
-    <!--<div class="flex flex-col gap-4">
-      <label for="code" class="font-semibold w-24">Code</label>
-      <input pInputText type="text" id="code" placeholder="Code" formControlName="code" [invalid]="isInvalid('code')" />
-      @if (isInvalid('code')) {
-        <p-message severity="error" size="small" variant="simple">Code is required.</p-message>
-      }
-    </div>-->
     <div class="flex flex-col gap-4">
       <label for="type" class="font-semibold w-24">Type</label>
-      <p-select id="type" [options]="roomTypeOptions" optionLabel="label" optionValue="value"formControlName="type" appendTo="body" placeholder="Select a type" />
+      <p-select id="type" [options]="roomTypeOptions" optionLabel="label" optionValue="value" formControlName="type" appendTo="body" placeholder="Select a type" />
       @if (isInvalid('type')) {
         <p-message severity="error" size="small" variant="simple">Type is required.</p-message>
       }

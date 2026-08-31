@@ -1,0 +1,43 @@
+.weather-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.weather-actions__refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(14, 116, 144, 0.25);
+  border-radius: 999px;
+  background: transparent;
+  padding: 0.35rem 0.85rem;
+  color: rgb(14, 116, 144);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.weather-actions__refresh:hover:not(:disabled) {
+  background: rgba(14, 116, 144, 0.08);
+  border-color: rgba(14, 116, 144, 0.5);
+}
+
+.weather-actions__refresh:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.weather-actions__icon {
+  font-size: 1rem;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.weather-actions__icon--spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

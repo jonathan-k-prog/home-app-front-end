@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, Input} from '@angular/core';
 import {Device} from '../../../../core/device/device.model';
 
 @Component({
@@ -8,5 +8,5 @@ import {Device} from '../../../../core/device/device.model';
   styleUrl: './properties.css',
 })
 export class Properties {
-  @Input() public device: Device | null = null;
+  selectedDevice = input<Device | null>(null);
 }

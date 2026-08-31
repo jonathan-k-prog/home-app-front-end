@@ -1,5 +1,13 @@
-<section class="room-tracker-page px-6 py-8">
-  <div class="mx-auto max-w-3xl">
-    <h1 class="text-2xl font-semibold">Room Tracker</h1>
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <room-tracker-title/>
+    <room-tracker-actions
+      [selectedRoom]="roomTrackerStore.selectedRoom()"
+      [rooms]="roomStore.rooms()"
+      [loadingRooms]="roomStore.loadingRooms()"/>
   </div>
-</section>
+
+  <room-tracker-properties [selectedRoom]="roomTrackerStore.selectedRoom()" class="mb-2"/>
+  <room-tracker-container [selectedRoom]="roomTrackerStore.selectedRoom()" [devices]="roomTrackerStore.selectedDevices()"/>
+</div>
+<p-toast position="bottom-right"/>

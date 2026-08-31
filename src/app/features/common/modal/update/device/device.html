@@ -8,15 +8,24 @@
       }
     </div>
     <div class="flex flex-col gap-4">
+      <label for="identifier" class="font-semibold w-24">Identifier</label>
+      <input pInputText type="text" id="identifier" placeholder="Identifier" formControlName="identifier" [invalid]="isInvalid('identifier')" />
+      @if (hasError('identifier', 'required')) {
+        <p-message severity="error" size="small" variant="simple">Identifier is required.</p-message>
+      } @else if (hasError('identifier', 'notUnique')) {
+        <p-message severity="error" size="small" variant="simple">Identifier is already used.</p-message>
+      }
+    </div>
+    <div class="flex flex-col gap-4">
       <label for="type" class="font-semibold w-24">Type</label>
-      <p-select id="type" [options]="deviceTypeOptions" optionLabel="label" optionValue="value"formControlName="type" appendTo="body" placeholder="Select a type" />
+      <p-select id="type" [options]="deviceTypeOptions" optionLabel="label" optionValue="value" formControlName="type" appendTo="body" placeholder="Select a type" />
       @if (isInvalid('type')) {
         <p-message severity="error" size="small" variant="simple">Type is required.</p-message>
       }
     </div>
     <div class="flex flex-col gap-4">
       <label for="room" class="font-semibold w-24">Room</label>
-      <p-select id="room" [options]="rooms" [loading]="loadingRooms" formControlName="roomId" optionLabel="name" optionValue="id" appendTo="body" placeholder="Select a room" />
+      <p-select id="room" [options]="rooms()" [loading]="loadingRooms()" formControlName="roomId" optionLabel="name" optionValue="id" appendTo="body" placeholder="Select a room" />
       @if (isInvalid('roomId')) {
         <p-message severity="error" size="small" variant="simple">Room is required.</p-message>
       }

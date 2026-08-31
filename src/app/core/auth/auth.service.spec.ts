@@ -9,7 +9,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({});
   });
 
-  it('reports unauthenticated when no session is stored', () => {
+ it('reports unauthenticated when no session is stored', () => {
     const service = TestBed.inject(AuthService);
 
     expect(service.isAuthenticated()).toBe(false);
@@ -18,7 +18,7 @@ describe('AuthService', () => {
   it('stores a session and reports authenticated', () => {
     const service = TestBed.inject(AuthService);
     const session: AuthSession = {
-      accessToken: 'app-token',
+      token: 'app-token',
       user: {
         email: 'user@example.com',
         name: 'User Example',
@@ -26,9 +26,9 @@ describe('AuthService', () => {
       },
     };
 
-    service.setSession(session);
+    service.setLocal(session);
 
     expect(service.isAuthenticated()).toBe(true);
-    expect(service.getSession()).toEqual(session);
+    expect(service.getLocal()).toEqual(session);
   });
 });

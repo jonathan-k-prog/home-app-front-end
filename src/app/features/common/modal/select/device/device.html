@@ -1,46 +1,15 @@
-<!--
-<p-dialog header="Add Device" [modal]="true" [(visible)]="visible" (onHide)="cancel()" [style]="{ width: '50rem' }">
-  <form [formGroup]="form" class="flex flex-col gap-4 mb-4 w-full">
-    <div class="flex flex-col gap-4">
-      <label for="name" class="font-semibold w-24">Name</label>
-      <input pInputText type="text" id="name" placeholder="Name" formControlName="name" [invalid]="isInvalid('name')" />
-      @if (isInvalid('name')) {
-        <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
-      }
-    </div>
-    <div class="flex flex-col gap-4">
-      <label for="code" class="font-semibold w-24">Code</label>
-      <input pInputText type="text" id="code" placeholder="Code" formControlName="code" [invalid]="isInvalid('code')" />
-      @if (isInvalid('code')) {
-        <p-message severity="error" size="small" variant="simple">Code is required.</p-message>
-      }
-    </div>
-    <div class="flex flex-col gap-4">
-      <label for="room" class="font-semibold w-24">Room</label>
-      <p-select id="room" [options]="rooms" [loading]="loadingRooms" formControlName="roomId" optionLabel="name" optionValue="id" appendTo="body" placeholder="Select a room" />
-      @if (isInvalid('roomId')) {
-        <p-message severity="error" size="small" variant="simple">Room is required.</p-message>
-      }
-    </div>
-  </form>
-  <div class="flex justify-between gap-2">
-    <p-button icon="pi pi-ban" label="Cancel" severity="secondary" (onClick)="cancel()" />
-    <p-button icon="pi pi-check" iconPos="right" label="Save" [disabled]="form.invalid" (onClick)="save()" />
-  </div>
-</p-dialog>
--->
 <p-dialog header="Select Device" [modal]="true" [(visible)]="visible" (onHide)="cancel()" [style]="{ width: '50rem' }">
-  <p-table #table [value]="devices" scrollHeight="400px" >
+  <p-table #table [value]="devices()" scrollHeight="400px" >
     <ng-template #caption>
       <div class="flex justify-between">
-        <p-button outlined [label]="`${devices.length} Devices`" />
+        <p-button outlined [label]="`${devices().length} Devices`" />
       </div>
     </ng-template>
 
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="vehicleModel.name" class="w-[30%]">Name <p-sortIcon field="name"></p-sortIcon></th>
-        <th pSortableColumn="code" class="w-[30%]">Code <p-sortIcon field="code"></p-sortIcon></th>
+        <th pSortableColumn="item.name" class="w-[30%]">Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="item.code" class="w-[30%]">Code <p-sortIcon field="code"></p-sortIcon></th>
         <th class="w-[10%]">Actions</th>
       </tr>
     </ng-template>
@@ -58,7 +27,7 @@
     </ng-template>
 
     <ng-template #emptymessage>
-      @if (loadingDevices){
+      @if (loadingDevices()){
         <tr>
           <td><p-skeleton/></td>
           <td><p-skeleton/></td>
@@ -84,6 +53,5 @@
 
   <div class="flex justify-between gap-2 mt-2">
     <p-button icon="pi pi-ban" label="Cancel" severity="secondary" (onClick)="cancel()" />
-
   </div>
 </p-dialog>

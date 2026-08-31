@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Input, Output} from '@angular/core';
 import {Device} from '../../../../../core/device/device.model';
 import {Dialog} from 'primeng/dialog';
 import {Button} from 'primeng/button';
@@ -17,8 +17,8 @@ import {Skeleton} from 'primeng/skeleton';
   styleUrl: './device.css',
 })
 export class CommonModalSelectDeviceComponent {
-  @Input() devices: Device[] = [];
-  @Input() loadingDevices: boolean = false;
+  public devices = input<Device[]>([]);
+  public loadingDevices = input<boolean>(false);
 
   @Output() onSubmit: EventEmitter<Device> = new EventEmitter();
 

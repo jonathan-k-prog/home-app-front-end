@@ -1,0 +1,8 @@
+@if (selectedRoom()) {
+  <p-card class="flex flex-col gap-4">
+    @for (device of devices(); track device.id) {
+      <room-tracker-container-device-viewer [device]="device"/>
+    }
+  </p-card>
+
+}

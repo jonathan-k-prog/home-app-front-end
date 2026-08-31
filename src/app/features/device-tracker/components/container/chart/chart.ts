@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges} from '@angular/core';
+import {Component, inject, input, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges} from '@angular/core';
 import {Device} from '../../../../../core/device/device.model';
 import {UIChart} from 'primeng/chart';
 import {isPlatformBrowser} from '@angular/common';
@@ -12,10 +12,10 @@ import {isPlatformBrowser} from '@angular/common';
   styleUrl: './chart.css',
 })
 export class Chart implements OnInit, OnChanges {
-  @Input() x: any[] = [];
-  @Input() y: any[] = [];
+  x = input<any[]>([]);
+  y = input<any[]>([]);
+  selectedDevice = input<Device | null>(null);
 
-  @Input() selectedDevice: Device | null = null;
   data: any;
   options: any;
   platformId = inject(PLATFORM_ID);

@@ -1,0 +1,8 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <weather-title/>
+    <weather-actions/>
+  </div>
+  <weather-dashboard [weather]="weatherStore.weather()" [loadingWeather]="weatherStore.loadingWeather()"/>
+</div>
+<p-toast position="bottom-right"/>

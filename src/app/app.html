@@ -1,7 +1,9 @@
 <main class="flex flex-col h-screen  dark:bg-gray-800">
-  <div class="sticky top-0 z-[100]">
-    <common-nav-bar/>
-  </div>
+  @if (!router.url.includes('/auth')) {
+    <div class="sticky top-0 z-[100]">
+      <app-nav-bar/>
+    </div>
+  }
 
   <div class="flex-1 flex flex-col bg-gray-200">
     <router-outlet/>

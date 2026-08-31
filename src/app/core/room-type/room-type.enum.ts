@@ -1,3 +1,3 @@
 export enum RoomType {
-  DEFAULT,
+  DEFAULT = 'DEFAULT',
 }

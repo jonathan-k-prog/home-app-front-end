@@ -2,13 +2,12 @@
   <div class="flex items-center justify-between mb-6">
     <device-tracker-title/>
     <device-tracker-actions
-      [selectedDevice]="selectedDevice$ | async"
-      [devices]="(devices$ | async) || []"
-      [loadingDevices]="(loadingDevices$ | async) || false"/>
+      [selectedDevice]="deviceTrackerStore.selectedDevice()"
+      [devices]="deviceStore.devices()"
+      [loadingDevices]="deviceStore.loadingDevices()"/>
   </div>
 
-  <device-tracker-properties [device]="selectedDevice$ | async" class="mb-2"/>
-  <device-tracker-container [selectedDevice]="selectedDevice$ | async"/>
-
+  <device-tracker-properties [selectedDevice]="deviceTrackerStore.selectedDevice()" class="mb-2"/>
+  <device-tracker-container [selectedDevice]="deviceTrackerStore.selectedDevice()"/>
 </div>
 <p-toast position="bottom-right"/>

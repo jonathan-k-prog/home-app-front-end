@@ -19,8 +19,10 @@ export class Config {
   }
 
   get apiUrl(): string {
-    console.log(this.config.apiUrl);
-
     return this.config.apiUrl || '';
+  }
+
+  get mqttUrl(): string {
+    return this.config.mqttUrl || '';
   }
 }
